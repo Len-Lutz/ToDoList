@@ -30,7 +30,7 @@
                     <li class="list-group-item animate__animated animate__fadeInBottomLeft">
                         Wash Car <button onclick="removeLi(this.parentNode)" class="button">Remove</button>
                     </li>
-                    <li class="list-group-item animate__animated animate__fadeInBottomLeft">
+                    <li class="list-group-item animate__animated animate__fadeInBottomRight">
                         Clean Garage <button onclick="removeLi(this.parentNode)" class="button">Remove</button>
                     </li>
                     <li class="list-group-item checked animate__animated animate__fadeInBottomLeft">
@@ -65,27 +65,30 @@
     <script>
         // Add a task using input from user
         function addTask() {
-            let li = document.createElement("li");
-            let list = document.getElementById("uList");
-            let tempStr = document.getElementById("newTask").value;
-            let inputValue = tempStr.trim();
-            let tNode = document.createTextNode(inputValue);
-
-            li.appendChild(tNode);
-            li.className = "list-group-item animate__animated animate__fadeInBottomRight";
+            let inputValue = document.getElementById("newTask").value.trim();
             if (inputValue === '') {
                 alert("Must enter task!");
-            } else {
-                list.appendChild(li);
+                return;
             }
-            document.getElementById("newTask").value = "";
 
+            let li = document.createElement("li");
+            let list = document.getElementById("uList");
+            let tNode = document.createTextNode(inputValue);
             let deleteButton = document.createElement("button");
             let txt = document.createTextNode("Remove");
+
+            li.appendChild(tNode);
+            li.className = "list-group-item animate__animated ";
+            li.className += ((list.children.length % 2) === 0) 
+                ? "animate__fadeInBottomLeft" : "animate__fadeInBottomRight" ;
+            list.appendChild(li);
+
             deleteButton.setAttribute("onclick", "removeLi(this.parentNode)");
             deleteButton.className = "button";
             deleteButton.appendChild(txt);
             li.appendChild(deleteButton);
+
+            document.getElementById("newTask").value = "";
         }
     </script>
 
