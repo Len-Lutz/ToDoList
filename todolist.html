@@ -16,23 +16,24 @@
 <body>
     <header class="fixed-top">
         <h1 class="center">To Do List</h1>
-        <input type="text" id="newTask" placeholder="New Task..."  onkeypress="handle(event)">
+        <input type="text" size="35" id="newTask" placeholder="New Task..."  onkeypress="handle(event)">
         <button>
             <span onclick="addTask()" class="addBtn">Add Task</span>
         </button>
     </header>
 
+    <!-- "margin-top 150px" makes sure top of list is visible below header -->
     <div class="container" style="margin-top: 150px;">
         <div class="row">
             <div class="col-sm-12">
                 <ul class="list-group" id="uList">
-                    <li class="list-group-item animate__animated animate__fadeInBottomRight">
+                    <li class="list-group-item animate__animated animate__fadeInBottomLeft">
                         Wash Car <button onclick="removeLi(this.parentNode)" class="button">Remove</button>
                     </li>
-                    <li class="list-group-item animate__animated animate__fadeInBottomRight">
+                    <li class="list-group-item animate__animated animate__fadeInBottomLeft">
                         Clean Garage <button onclick="removeLi(this.parentNode)" class="button">Remove</button>
                     </li>
-                    <li class="list-group-item checked animate__animated animate__fadeInBottomRight">
+                    <li class="list-group-item checked animate__animated animate__fadeInBottomLeft">
                         Mow Lawn<button onclick="removeLi(this.parentNode)" class="button">Remove</button>
                     </li>
                 </ul>
@@ -50,8 +51,9 @@
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
         </script>
 
+    <!-- toggle "checked" class when clicking on a list item
+    css can then determoine if box on left has checkmark or not -->
     <script>
-        // Add a "checked" symbol when clicking on a list item
         var list = document.querySelector('ul');
         list.addEventListener('click', function (ev) {
             if (ev.target.tagName === 'LI') {
@@ -61,14 +63,16 @@
     </script>
 
     <script>
+        // Add a task using input from user
         function addTask() {
             let li = document.createElement("li");
             let list = document.getElementById("uList");
-            let inputValue = document.getElementById("newTask").value;
+            let tempStr = document.getElementById("newTask").value;
+            let inputValue = tempStr.trim();
             let tNode = document.createTextNode(inputValue);
 
             li.appendChild(tNode);
-            li.className = "list-group-item card animate__animated animate__fadeInBottomRight";
+            li.className = "list-group-item animate__animated animate__fadeInBottomRight";
             if (inputValue === '') {
                 alert("Must enter task!");
             } else {
@@ -86,18 +90,14 @@
     </script>
 
     <script>
-        function toggleChecked(element) {
-            element.classList.toggle("checked");
-        }
-    </script>
-
-    <script>
         function removeLi(element) {
             element.remove();
         }
     </script>
 
     <script>
+        // check for enter key being pressed when entering new task description
+        // if pressed, call addTask function so user does not need to click button
         function handle(e) {
             if (e.keyCode === 13) {
                 e.preventDefault();
