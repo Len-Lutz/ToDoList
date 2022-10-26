@@ -94,7 +94,11 @@
 
     <script>
         function removeLi(element) {
-            element.remove();
+            element.classList.toggle('deleted');
+            setTimeout(function() {
+                element.remove();
+            }, 1000);
+//            element.remove();
         }
     </script>
 

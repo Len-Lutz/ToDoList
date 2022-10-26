@@ -70,6 +70,13 @@ ul li::before {
     content: url(../images/boxNoCheck25x25.png);
 }
 
+.deleted {
+    background: white !important;
+    color: white;
+    z-index: 20;
+    transition: 1000ms ease;
+}
+
 /* Darker background-color/* Set all odd list items to a different color (zebra-stripes) */
 ul li:nth-child(odd) {
     background: rgba(0, 0, 255, 0.1);
